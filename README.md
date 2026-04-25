@@ -1,2 +1,2 @@
-# API------
+# API-Pipeline-Review-Classification
 Классификация отзывов: скрипт читает отзывы → LLM определяет тональность (positive/negative/neutral) и тему → результат в CSV.
