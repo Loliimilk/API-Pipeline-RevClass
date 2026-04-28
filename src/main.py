@@ -22,3 +22,8 @@ if not MODEL:
 INPUT_FILE = "data/input_reviews.csv"
 OUTPUT_FILE = "data/output_reviews.csv"
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
+
+df = pd.read_csv(INPUT_FILE, sep=";", encoding="utf-8-sig")
+df = df[["review_id", "product_name", "rating", "review_text"]]
+
+results = []
