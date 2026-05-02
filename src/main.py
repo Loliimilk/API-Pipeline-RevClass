@@ -62,3 +62,28 @@ def fetch_batch_analysis(batch_data):
             print(f"Ошибка попытки {attempt}: {e}")
             time.sleep(5)
     return None
+
+def main():
+    if not API_KEY or not MODEL:
+        print("Ошибка: Проверьте .env файл!")
+        return
+
+    df = pd.read_csv(INPUT_FILE, sep=";", encoding="utf-8-sig")
+    all_results = []
+
+    for i in range(0, len(df), BATCH_SIZE):
+        batch = df.iloc[i : i + BATCH_SIZE]
+        print(f"Обработка: {i+1} - {min(i+BATCH_SIZE, len(df))}")
+        
+        batch_results = fetch_batch_analysis(batch)
+        
+        if batch_results:
+            all_results.extend(batch_results)
+        else:
+            # Если батч не удался, создаем пустые записи
+            for _, row in batch.iterrows():
+                all_results.append({"review_id": row["review_id"], "sentiment": "ошибка"})
+        
+        time.sleep(3) # Пауза для стабильности
+
+    save_results(all_results)
