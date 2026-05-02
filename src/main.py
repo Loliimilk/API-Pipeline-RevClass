@@ -6,7 +6,6 @@ import requests
 import pandas as pd
 from dotenv import load_dotenv
 
-# Настройка консоли
 try:
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
@@ -15,7 +14,6 @@ except Exception:
 
 load_dotenv()
 
-# Константы
 API_KEY = os.getenv("API_KEY")
 MODEL = os.getenv("MODEL")
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
@@ -80,10 +78,16 @@ def main():
         if batch_results:
             all_results.extend(batch_results)
         else:
-            # Если батч не удался, создаем пустые записи
             for _, row in batch.iterrows():
                 all_results.append({"review_id": row["review_id"], "sentiment": "ошибка"})
         
-        time.sleep(3) # Пауза для стабильности
+        time.sleep(3)
 
     save_results(all_results)
+
+def save_results(results):
+    output_df = pd.DataFrame(results)
+    output_df.to_csv(OUTPUT_FILE, sep=";", index=False, encoding="utf-8-sig")
+    print(f"Готово! Файл сохранен: {OUTPUT_FILE}")
+
+main()
