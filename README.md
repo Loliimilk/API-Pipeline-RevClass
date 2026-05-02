@@ -43,9 +43,13 @@ cd API-Pipeline-RevClass
 pip install -r requirements.txt
 ```
 ### 3. Создать файл .env
+`Укажите актуальный API_KEY и MODEL в созданном файле`
 ```bash
 cp .env.example .env
-# Укажите актуальный API_KEY и MODEL в созданном файле
+```
+или
+```bash
+copy .env.example .env
 ```
 ### 4. Запуск скрипта
 ```bash
