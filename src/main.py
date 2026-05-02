@@ -33,3 +33,32 @@ def extract_json_array(text):
         return json.loads(text)
     except (ValueError, json.JSONDecodeError):
         return None
+    
+def fetch_batch_analysis(batch_data):
+    reviews_text = ""
+    for _, row in batch_data.iterrows():
+        reviews_text += f"ID: {row['review_id']}\nТовар: {row['product_name']}\nОтзыв: {row['review_text']}\n---\n"
+
+    prompt = f"Определи тональность и тему. Верни ТОЛЬКО JSON-массив [{{'review_id': '...', 'sentiment': '...', 'topic': '...', 'summary': '...'}}].\nОтзывы:\n{reviews_text}"
+    
+    headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
+    payload = {
+        "model": MODEL,
+        "messages": [{"role": "user", "content": prompt}],
+        "temperature": 0.3,
+        "max_tokens": 1000
+    }
+
+    for attempt in range(3):
+        try:
+            resp = requests.post(API_URL, headers=headers, json=payload, timeout=40)
+            if resp.status_code == 429:
+                time.sleep(15)
+                continue
+            if resp.status_code == 200:
+                content = resp.json()["choices"][0]["message"]["content"]
+                return extract_json_array(content)
+        except Exception as e:
+            print(f"Ошибка попытки {attempt}: {e}")
+            time.sleep(5)
+    return None
