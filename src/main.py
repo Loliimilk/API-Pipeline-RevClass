@@ -22,3 +22,14 @@ API_URL = "https://openrouter.ai/api/v1/chat/completions"
 INPUT_FILE = "data/input_reviews.csv"
 OUTPUT_FILE = "data/output_reviews.csv"
 BATCH_SIZE = 5
+
+def extract_json_array(text):
+    try:
+        start = text.find('[')
+        end = text.rfind(']')
+        if start != -1 and end != -1:
+            clean_content = text[start:end+1]
+            return json.loads(clean_content)
+        return json.loads(text)
+    except (ValueError, json.JSONDecodeError):
+        return None
