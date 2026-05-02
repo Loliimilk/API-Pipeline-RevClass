@@ -1,29 +1,24 @@
 import os
+import sys
 import json
-import re
+import time
 import requests
 import pandas as pd
 from dotenv import load_dotenv
-import sys
-import io
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+
+# Настройка консоли
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 
 load_dotenv()
 
+# Константы
 API_KEY = os.getenv("API_KEY")
 MODEL = os.getenv("MODEL")
-
-if not API_KEY:
-    raise ValueError("API_KEY не найден в .env")
-
-if not MODEL:
-    raise ValueError("MODEL не найдена в .env")
-
+API_URL = "https://openrouter.ai/api/v1/chat/completions"
 INPUT_FILE = "data/input_reviews.csv"
 OUTPUT_FILE = "data/output_reviews.csv"
-API_URL = "https://openrouter.ai/api/v1/chat/completions"
-
-df = pd.read_csv(INPUT_FILE, sep=";", encoding="utf-8-sig")
-df = df[["review_id", "product_name", "rating", "review_text"]]
-
-results = []
+BATCH_SIZE = 5
