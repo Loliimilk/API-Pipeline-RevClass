@@ -1,3 +1,7 @@
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Processing-150458?logo=pandas)
+![Requests](https://img.shields.io/badge/Requests-HTTP-orange)
+![Status](https://img.shields.io/badge/status-completed-brightgreen)
 # API-Pipeline-Review-Classification
 
 ## Описание проекта
