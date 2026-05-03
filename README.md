@@ -1,3 +1,7 @@
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Processing-150458?logo=pandas)
+![Requests](https://img.shields.io/badge/Requests-HTTP-orange)
+![Status](https://img.shields.io/badge/status-completed-brightgreen)
 # API-Pipeline-Review-Classification
 
 ## Описание проекта
@@ -43,9 +47,13 @@ cd API-Pipeline-RevClass
 pip install -r requirements.txt
 ```
 ### 3. Создать файл .env
+Укажите актуальный API_KEY, MODEL и API_URL в созданном файле как в нем описано
 ```bash
 cp .env.example .env
-# Укажите актуальный API_KEY и MODEL в созданном файле
+```
+или
+```bash
+copy .env.example .env
 ```
 ### 4. Запуск скрипта
 ```bash

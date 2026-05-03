@@ -18,7 +18,7 @@ load_dotenv()
 
 API_KEY = os.getenv("API_KEY")
 MODEL = os.getenv("MODEL")
-API_URL = "https://openrouter.ai/api/v1/chat/completions"
+API_URL = os.getenv("API_URL")
 
 INPUT_FILE = "data/input_reviews.csv"
 OUTPUT_FILE = "data/output_reviews.csv"
