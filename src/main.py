@@ -124,5 +124,9 @@ for i in range(0, total_rows, BATCH_SIZE):
 
 pd.DataFrame(results).to_csv(OUTPUT_FILE, sep=";", index=False, encoding="utf-8-sig")
 
-print(f"\nГотово! Сохранено в {OUTPUT_FILE}")
+OUTPUT_JSON = OUTPUT_FILE.replace('.csv', '.json')
+with open(OUTPUT_JSON, 'w', encoding='utf-8') as f:
+    json.dump(results, f, ensure_ascii=False, indent=2)
+
+print(f"\nГотово! Сохранено в {OUTPUT_FILE} и {OUTPUT_JSON}")
 print(f"Всего записей в файле: {len(results)}")
