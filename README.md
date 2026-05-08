@@ -3,8 +3,9 @@
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)
 ![OpenRouter](https://img.shields.io/badge/OpenRouter-API-6a4c93?logo=openai&logoColor=white)
 ![pandas](https://img.shields.io/badge/pandas-CSV-150458?logo=pandas&logoColor=white)
+![Format](https://img.shields.io/badge/output-CSV%20%7C%20JSON-blue)
 
-Пайплайн для автоматической классификации отзывов с помощью LLM. Скрипт читает CSV с отзывами, отправляет их батчами в языковую модель через OpenRouter API, получает тональность, тему и краткое содержание для каждого отзыва — и сохраняет результат в новый CSV.
+Пайплайн для автоматической классификации отзывов с помощью LLM. Скрипт читает CSV с отзывами, отправляет их батчами в языковую модель через OpenRouter API, получает тональность, тему и краткое содержание для каждого отзыва — и сохраняет результат в новый CSV и JSON.
 
 ---
 
@@ -52,6 +53,7 @@ data/input_reviews.csv
          │
          ▼ (все батчи обработаны)
   data/output_reviews.csv
+  data/output_reviews.json
 ```
 
 ---
